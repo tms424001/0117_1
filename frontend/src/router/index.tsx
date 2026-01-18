@@ -26,6 +26,11 @@ import EnterpriseCompositePricesPage from '../pages/data-asset/enterprise/Compos
 import CompositePriceDetailPage from '../pages/data-asset/enterprise/CompositePriceDetailPage';
 import CompositeTemplatesPage from '../pages/data-asset/enterprise/CompositeTemplatesPage';
 
+// 标准库管理
+import TagSystemPage from '../pages/standard-library/TagSystemPage';
+import ScaleRangePage from '../pages/standard-library/ScaleRangePage';
+import StandardMappingPage from '../pages/standard-library/StandardMappingPage';
+
 // 占位页面
 import PlaceholderPage from '../pages/PlaceholderPage';
 
@@ -161,6 +166,28 @@ const router = createBrowserRouter([
           {
             path: 'marketplace/member-data',
             element: <PlaceholderPage />,
+          },
+        ],
+      },
+      // 标准库管理
+      {
+        path: 'standard-library',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/standard-library/tag-system" replace />,
+          },
+          {
+            path: 'tag-system',
+            element: <TagSystemPage />,
+          },
+          {
+            path: 'scale-range',
+            element: <ScaleRangePage />,
+          },
+          {
+            path: 'standard-mapping',
+            element: <StandardMappingPage />,
           },
         ],
       },
