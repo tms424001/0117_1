@@ -22,6 +22,9 @@ import IndexPublishPage from '../pages/data-asset/enterprise/IndexPublishPage';
 import EnterpriseMaterialPricesPage from '../pages/data-asset/enterprise/MaterialPricesPage';
 import MaterialPriceDetailPage from '../pages/data-asset/enterprise/MaterialPriceDetailPage';
 import MaterialPriceAnalysisPage from '../pages/data-asset/enterprise/MaterialPriceAnalysisPage';
+import EnterpriseCompositePricesPage from '../pages/data-asset/enterprise/CompositePricesPage';
+import CompositePriceDetailPage from '../pages/data-asset/enterprise/CompositePriceDetailPage';
+import CompositeTemplatesPage from '../pages/data-asset/enterprise/CompositeTemplatesPage';
 
 // 占位页面
 import PlaceholderPage from '../pages/PlaceholderPage';
@@ -121,7 +124,19 @@ const router = createBrowserRouter([
           },
           {
             path: 'enterprise/composites',
+            element: <EnterpriseCompositePricesPage />,
+          },
+          {
+            path: 'enterprise/composites/:compositeId',
+            element: <CompositePriceDetailPage />,
+          },
+          {
+            path: 'enterprise/composites/analysis',
             element: <PlaceholderPage />,
+          },
+          {
+            path: 'enterprise/composites/templates',
+            element: <CompositeTemplatesPage />,
           },
           {
             path: 'enterprise/indexes',
