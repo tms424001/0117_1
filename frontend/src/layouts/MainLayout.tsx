@@ -16,6 +16,9 @@ import {
   SafetyCertificateOutlined,
   CalculatorOutlined,
   FundOutlined,
+  BankOutlined,
+  ShopOutlined,
+  AppstoreOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import type { MenuProps } from 'antd';
@@ -47,7 +50,8 @@ function getItem(
   } as MenuItem;
 }
 
-const menuItems: MenuItem[] = [
+// 数据采集模块菜单
+const dataCollectionMenuItems: MenuItem[] = [
   getItem('数据采集', 'data-collection', <CloudUploadOutlined />, [
     getItem('造价文件', '/data-collection/cost-files', <FileTextOutlined />),
     getItem('材价文件', '/data-collection/material-prices', <DollarOutlined />),
@@ -61,6 +65,26 @@ const menuItems: MenuItem[] = [
   ]),
 ];
 
+// 数据资产模块菜单
+const dataAssetMenuItems: MenuItem[] = [
+  getItem('企业库', 'enterprise', <BankOutlined />, [
+    getItem('案例库', '/data-asset/enterprise/cases', <ProjectOutlined />),
+    getItem('材价库', '/data-asset/enterprise/materials', <DollarOutlined />),
+    getItem('综价库', '/data-asset/enterprise/composites', <BarChartOutlined />),
+    getItem('指标库', '/data-asset/enterprise/indexes', <FundOutlined />),
+  ]),
+  getItem('数据商城', 'marketplace', <ShopOutlined />, [
+    getItem('信息价', '/data-asset/marketplace/info-price', <DollarOutlined />),
+    getItem('公共资源案例库', '/data-asset/marketplace/public-cases', <ProjectOutlined />),
+    getItem('会员单位数据', '/data-asset/marketplace/member-data', <AppstoreOutlined />),
+  ]),
+];
+
+// 其他模块菜单（占位）
+const placeholderMenuItems: MenuItem[] = [
+  getItem('功能开发中', 'placeholder', <AppstoreOutlined />),
+];
+
 const MainLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [currentModule, setCurrentModule] = useState('data-collection');
@@ -70,11 +94,25 @@ const MainLayout: React.FC = () => {
   const handleModuleChange = (moduleKey: string) => {
     setCurrentModule(moduleKey);
     // 切换模块时导航到对应模块的默认页面
-    if (moduleKey === 'data-collection') {
-      navigate('/data-collection/cost-files');
-    } else {
-      // 其他模块暂未实现，显示提示
-      navigate(`/${moduleKey}`);
+    const defaultRoutes: Record<string, string> = {
+      'data-collection': '/data-collection/cost-files',
+      'data-asset': '/data-asset/enterprise/cases',
+      'quality-control': '/quality-control',
+      'pricing': '/pricing',
+      'estimation': '/estimation',
+    };
+    navigate(defaultRoutes[moduleKey] || `/${moduleKey}`);
+  };
+
+  // 根据当前模块获取菜单项
+  const getMenuItems = () => {
+    switch (currentModule) {
+      case 'data-collection':
+        return dataCollectionMenuItems;
+      case 'data-asset':
+        return dataAssetMenuItems;
+      default:
+        return placeholderMenuItems;
     }
   };
 
@@ -120,8 +158,30 @@ const MainLayout: React.FC = () => {
     if (path.includes('/data-collection')) {
       return ['data-collection'];
     }
+    if (path.includes('/data-asset/enterprise')) {
+      return ['enterprise'];
+    }
+    if (path.includes('/data-asset/marketplace')) {
+      return ['marketplace'];
+    }
     return [];
   };
+
+  // 根据路径自动设置当前模块
+  React.useEffect(() => {
+    const path = location.pathname;
+    if (path.includes('/data-collection') || path.includes('/my-data')) {
+      setCurrentModule('data-collection');
+    } else if (path.includes('/data-asset')) {
+      setCurrentModule('data-asset');
+    } else if (path.includes('/quality-control')) {
+      setCurrentModule('quality-control');
+    } else if (path.includes('/pricing')) {
+      setCurrentModule('pricing');
+    } else if (path.includes('/estimation')) {
+      setCurrentModule('estimation');
+    }
+  }, [location.pathname]);
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -206,7 +266,7 @@ const MainLayout: React.FC = () => {
             mode="inline"
             selectedKeys={getSelectedKeys()}
             defaultOpenKeys={getOpenKeys()}
-            items={menuItems}
+            items={getMenuItems()}
             onClick={handleMenuClick}
             style={{ borderRight: 0 }}
           />

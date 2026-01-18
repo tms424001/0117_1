@@ -12,6 +12,14 @@ import MyIndexesPage from '../pages/data-collection/my-data/MyIndexesPage';
 import MyMaterialPricesPage from '../pages/data-collection/my-data/MyMaterialPricesPage';
 import MyCompositePricesPage from '../pages/data-collection/my-data/MyCompositePricesPage';
 
+// 数据资产 - 企业库
+import EnterpriseCasesPage from '../pages/data-asset/enterprise/CasesPage';
+import EnterpriseCaseDetailPage from '../pages/data-asset/enterprise/CaseDetailPage';
+import CaseComparePage from '../pages/data-asset/enterprise/CaseComparePage';
+import EnterpriseIndexesPage from '../pages/data-asset/enterprise/IndexesPage';
+import IndexTrendPage from '../pages/data-asset/enterprise/IndexTrendPage';
+import IndexPublishPage from '../pages/data-asset/enterprise/IndexPublishPage';
+
 // 占位页面
 import PlaceholderPage from '../pages/PlaceholderPage';
 
@@ -72,10 +80,59 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // 其他模块（占位）
+      // 数据资产模块
       {
         path: 'data-asset',
-        element: <PlaceholderPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/data-asset/enterprise/cases" replace />,
+          },
+          {
+            path: 'enterprise/cases',
+            element: <EnterpriseCasesPage />,
+          },
+          {
+            path: 'enterprise/cases/:caseId',
+            element: <EnterpriseCaseDetailPage />,
+          },
+          {
+            path: 'enterprise/cases/compare',
+            element: <CaseComparePage />,
+          },
+          {
+            path: 'enterprise/materials',
+            element: <PlaceholderPage />,
+          },
+          {
+            path: 'enterprise/composites',
+            element: <PlaceholderPage />,
+          },
+          {
+            path: 'enterprise/indexes',
+            element: <EnterpriseIndexesPage />,
+          },
+          {
+            path: 'enterprise/indexes/trend',
+            element: <IndexTrendPage />,
+          },
+          {
+            path: 'enterprise/indexes/publish',
+            element: <IndexPublishPage />,
+          },
+          {
+            path: 'marketplace/info-price',
+            element: <PlaceholderPage />,
+          },
+          {
+            path: 'marketplace/public-cases',
+            element: <PlaceholderPage />,
+          },
+          {
+            path: 'marketplace/member-data',
+            element: <PlaceholderPage />,
+          },
+        ],
       },
       {
         path: 'quality-control',
