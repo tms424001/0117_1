@@ -110,6 +110,17 @@ const indexSystemMenuItems: MenuItem[] = [
   ]),
 ];
 
+// 质控模块菜单
+const qualityControlMenuItems: MenuItem[] = [
+  getItem('文件检查', 'file-check', <SafetyCertificateOutlined />, [
+    getItem('单文件检查', '/quality-control/single-check', <FileTextOutlined />),
+    getItem('多文件对比', '/quality-control/multi-compare', <FileTextOutlined />),
+  ]),
+  getItem('规则管理', 'rule-manage', <SettingOutlined />, [
+    getItem('检查规则', '/quality-control/rules', <SettingOutlined />),
+  ]),
+];
+
 // 其他模块菜单（占位）
 const placeholderMenuItems: MenuItem[] = [
   getItem('功能开发中', 'placeholder', <AppstoreOutlined />),
@@ -129,7 +140,7 @@ const MainLayout: React.FC = () => {
       'data-asset': '/data-asset/enterprise/cases',
       'standard-library': '/standard-library/tag-system',
       'index-system': '/index-system/overview',
-      'quality-control': '/quality-control',
+      'quality-control': '/quality-control/single-check',
       'pricing': '/pricing',
       'estimation': '/estimation',
     };
@@ -147,6 +158,8 @@ const MainLayout: React.FC = () => {
         return standardLibraryMenuItems;
       case 'index-system':
         return indexSystemMenuItems;
+      case 'quality-control':
+        return qualityControlMenuItems;
       default:
         return placeholderMenuItems;
     }

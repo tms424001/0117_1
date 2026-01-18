@@ -39,6 +39,11 @@ import InfoPriceDetailPage from '../pages/data-asset/marketplace/InfoPriceDetail
 import MemberDataPage from '../pages/data-asset/marketplace/MemberDataPage';
 import MemberDataDetailPage from '../pages/data-asset/marketplace/MemberDataDetailPage';
 
+// 质控模块
+import SingleFileCheckPage from '../pages/quality-control/SingleFileCheckPage';
+import MultiFileComparePage from '../pages/quality-control/MultiFileComparePage';
+import RuleManagePage from '../pages/quality-control/RuleManagePage';
+
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
 import IndexAnalysisPage from '../pages/index-system/IndexAnalysisPage';
@@ -265,9 +270,27 @@ const router = createBrowserRouter([
           },
         ],
       },
+      // 质控模块
       {
         path: 'quality-control',
-        element: <PlaceholderPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/quality-control/single-check" replace />,
+          },
+          {
+            path: 'single-check',
+            element: <SingleFileCheckPage />,
+          },
+          {
+            path: 'multi-compare',
+            element: <MultiFileComparePage />,
+          },
+          {
+            path: 'rules',
+            element: <RuleManagePage />,
+          },
+        ],
       },
       {
         path: 'pricing',
