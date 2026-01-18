@@ -49,6 +49,7 @@ import CompositePriceCheckPage from '../pages/quality-control/CompositePriceChec
 import BoQDefectCheckPage from '../pages/quality-control/BoQDefectCheckPage';
 import IndexRationalityCheckPage from '../pages/quality-control/IndexRationalityCheckPage';
 import BidClearingPage from '../pages/quality-control/BidClearingPage';
+import QCWorkbenchPage from '../pages/quality-control/QCWorkbenchPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -286,7 +287,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'workbench',
-            element: <SingleFileCheckPage />,
+            element: <QCWorkbenchPage />,
           },
           {
             path: 'single-check',
