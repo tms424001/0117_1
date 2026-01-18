@@ -47,6 +47,7 @@ import ComplianceCheckPage from '../pages/quality-control/ComplianceCheckPage';
 import MaterialPriceCheckPage from '../pages/quality-control/MaterialPriceCheckPage';
 import CompositePriceCheckPage from '../pages/quality-control/CompositePriceCheckPage';
 import BoQDefectCheckPage from '../pages/quality-control/BoQDefectCheckPage';
+import IndexRationalityCheckPage from '../pages/quality-control/IndexRationalityCheckPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -308,7 +309,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'index-check',
-            element: <SingleFileCheckPage />,
+            element: <IndexRationalityCheckPage />,
           },
           {
             path: 'bid-clearing',
