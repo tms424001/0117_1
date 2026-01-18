@@ -19,6 +19,9 @@ import {
   BankOutlined,
   ShopOutlined,
   AppstoreOutlined,
+  TagsOutlined,
+  SlidersOutlined,
+  ApartmentOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import type { MenuProps } from 'antd';
@@ -27,6 +30,7 @@ import type { MenuProps } from 'antd';
 const topModules = [
   { key: 'data-collection', label: '数据采集', icon: <CloudUploadOutlined /> },
   { key: 'data-asset', label: '数据资产', icon: <DatabaseOutlined /> },
+  { key: 'standard-library', label: '标准库', icon: <AppstoreOutlined /> },
   { key: 'quality-control', label: '质控', icon: <SafetyCertificateOutlined /> },
   { key: 'pricing', label: '计价', icon: <CalculatorOutlined /> },
   { key: 'estimation', label: '估算', icon: <FundOutlined /> },
@@ -80,6 +84,15 @@ const dataAssetMenuItems: MenuItem[] = [
   ]),
 ];
 
+// 标准库管理模块菜单
+const standardLibraryMenuItems: MenuItem[] = [
+  getItem('标准库管理', 'standard-library', <AppstoreOutlined />, [
+    getItem('标签体系管理', '/standard-library/tag-system', <TagsOutlined />),
+    getItem('规模分档配置', '/standard-library/scale-range', <SlidersOutlined />),
+    getItem('标准映射管理', '/standard-library/standard-mapping', <ApartmentOutlined />),
+  ]),
+];
+
 // 其他模块菜单（占位）
 const placeholderMenuItems: MenuItem[] = [
   getItem('功能开发中', 'placeholder', <AppstoreOutlined />),
@@ -97,6 +110,7 @@ const MainLayout: React.FC = () => {
     const defaultRoutes: Record<string, string> = {
       'data-collection': '/data-collection/cost-files',
       'data-asset': '/data-asset/enterprise/cases',
+      'standard-library': '/standard-library/tag-system',
       'quality-control': '/quality-control',
       'pricing': '/pricing',
       'estimation': '/estimation',
@@ -111,6 +125,8 @@ const MainLayout: React.FC = () => {
         return dataCollectionMenuItems;
       case 'data-asset':
         return dataAssetMenuItems;
+      case 'standard-library':
+        return standardLibraryMenuItems;
       default:
         return placeholderMenuItems;
     }
@@ -164,6 +180,9 @@ const MainLayout: React.FC = () => {
     if (path.includes('/data-asset/marketplace')) {
       return ['marketplace'];
     }
+    if (path.includes('/standard-library')) {
+      return ['standard-library'];
+    }
     return [];
   };
 
@@ -174,6 +193,8 @@ const MainLayout: React.FC = () => {
       setCurrentModule('data-collection');
     } else if (path.includes('/data-asset')) {
       setCurrentModule('data-asset');
+    } else if (path.includes('/standard-library')) {
+      setCurrentModule('standard-library');
     } else if (path.includes('/quality-control')) {
       setCurrentModule('quality-control');
     } else if (path.includes('/pricing')) {
