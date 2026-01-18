@@ -32,11 +32,10 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const moduleMenus: Record<string, MenuItem[]> = {
   collection: [
-    { key: '/collection/cost-file', icon: <UploadOutlined />, label: '造价文件' },
-    { key: '/collection/material-price', icon: <FileTextOutlined />, label: '材价文件' },
-    { key: '/collection/composite-price', icon: <FileTextOutlined />, label: '综价文件' },
+    { key: '/collect/imports', icon: <UploadOutlined />, label: '导入批次' },
+    { key: '/data-lake', icon: <DatabaseOutlined />, label: '数据湖' },
     { type: 'divider' },
-    { key: '/collection/my-data', icon: <FolderOutlined />, label: '我的数据' },
+    { key: '/my-data', icon: <FolderOutlined />, label: '我的数据' },
   ],
   asset: [
     {
@@ -71,9 +70,10 @@ const moduleMenus: Record<string, MenuItem[]> = {
       icon: <LineChartOutlined />,
       label: '指标系统',
       children: [
-        { key: '/estimation/indexes', label: '指标列表' },
-        { key: '/estimation/analysis', label: '指标分析' },
-        { key: '/estimation/publish', label: '指标发布' },
+        { key: '/indexes/list', label: '指标列表' },
+        { key: '/indexes/calc/tasks', label: '指标计算' },
+        { key: '/indexes/analysis', label: '指标分析' },
+        { key: '/publish/versions', label: '指标发布' },
       ],
     },
     {
@@ -81,8 +81,9 @@ const moduleMenus: Record<string, MenuItem[]> = {
       icon: <TagsOutlined />,
       label: '标准库',
       children: [
-        { key: '/estimation/tags', label: '功能标签' },
-        { key: '/estimation/scales', label: '规模分档' },
+        { key: '/standard/tags', label: '功能标签' },
+        { key: '/standard/scales', label: '规模分档' },
+        { key: '/standard/mappings', label: '空间专业映射' },
       ],
     },
     {
@@ -90,12 +91,12 @@ const moduleMenus: Record<string, MenuItem[]> = {
       icon: <ProjectOutlined />,
       label: '项目管理',
       children: [
-        { key: '/estimation/projects', label: '项目列表' },
-        { key: '/estimation/tagging', label: '数据标签化' },
+        { key: '/projects', label: '项目列表' },
+        { key: '/tagging/tasks', label: '数据标签化' },
       ],
     },
     { type: 'divider' },
-    { key: '/estimation/estimate', icon: <CalculatorOutlined />, label: '投资估算' },
+    { key: '/estimation/tasks', icon: <CalculatorOutlined />, label: '投资估算' },
   ],
 };
 
@@ -113,8 +114,8 @@ export default function AppSidebar({ collapsed, onCollapse, currentModule }: App
     const path = location.pathname;
     const openKeys: string[] = [];
     if (path.includes('/asset/')) openKeys.push('enterprise');
-    if (path.includes('/indexes') || path.includes('/analysis') || path.includes('/publish')) openKeys.push('index-system');
-    if (path.includes('/tags') || path.includes('/scales')) openKeys.push('standard-lib');
+    if (path.includes('/indexes') || path.includes('/publish')) openKeys.push('index-system');
+    if (path.includes('/standard/')) openKeys.push('standard-lib');
     if (path.includes('/projects') || path.includes('/tagging')) openKeys.push('projects');
     return openKeys;
   };

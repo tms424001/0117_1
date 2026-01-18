@@ -89,13 +89,13 @@ export default function EstimationList() {
       key: 'view',
       icon: <EyeOutlined />,
       label: '查看',
-      onClick: () => navigate(`/estimations/${record.id}`),
+      onClick: () => navigate(`/estimation/tasks/${record.id}/quick`),
     },
     {
       key: 'edit',
       icon: <EditOutlined />,
       label: '编辑',
-      onClick: () => navigate(`/estimations/${record.id}`),
+      onClick: () => navigate(`/estimation/tasks/${record.id}/quick`),
     },
     {
       key: 'copy',
@@ -120,7 +120,7 @@ export default function EstimationList() {
       key: 'estimationName',
       width: 250,
       render: (text, record) => (
-        <a onClick={() => navigate(`/estimations/${record.id}`)}>{text}</a>
+        <a onClick={() => navigate(`/estimation/tasks/${record.id}/quick`)}>{text}</a>
       ),
     },
     {
@@ -215,7 +215,7 @@ export default function EstimationList() {
           </div>
           <div className="table-toolbar-right">
             <Space>
-              <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/estimations/new')}>
+              <Button type="primary" icon={<PlusOutlined />} onClick={() => navigate('/estimation/tasks/new/quick')}>
                 新建估算
               </Button>
             </Space>
