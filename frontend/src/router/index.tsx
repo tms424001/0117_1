@@ -52,6 +52,7 @@ import BidClearingPage from '../pages/quality-control/BidClearingPage';
 import QCWorkbenchPage from '../pages/quality-control/QCWorkbenchPage';
 import SettlementReviewPage from '../pages/quality-control/SettlementReviewPage';
 import BudgetCollectionPage from '../pages/quality-control/BudgetCollectionPage';
+import BenchmarkAnalysisPage from '../pages/quality-control/BenchmarkAnalysisPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -329,7 +330,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'benchmark',
-            element: <MultiFileComparePage />,
+            element: <BenchmarkAnalysisPage />,
           },
           {
             path: 'rules',
