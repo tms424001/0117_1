@@ -39,6 +39,11 @@ import InfoPriceDetailPage from '../pages/data-asset/marketplace/InfoPriceDetail
 import MemberDataPage from '../pages/data-asset/marketplace/MemberDataPage';
 import MemberDataDetailPage from '../pages/data-asset/marketplace/MemberDataDetailPage';
 
+// 指标体系
+import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
+import IndexAnalysisPage from '../pages/index-system/IndexAnalysisPage';
+import IndexTrendAnalysisPage from '../pages/index-system/IndexTrendAnalysisPage';
+
 // 标准库管理
 import TagSystemPage from '../pages/standard-library/TagSystemPage';
 import ScaleRangePage from '../pages/standard-library/ScaleRangePage';
@@ -235,6 +240,28 @@ const router = createBrowserRouter([
           {
             path: 'standard-mapping',
             element: <StandardMappingPage />,
+          },
+        ],
+      },
+      // 指标体系
+      {
+        path: 'index-system',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/index-system/overview" replace />,
+          },
+          {
+            path: 'overview',
+            element: <IndexOverviewPage />,
+          },
+          {
+            path: 'analysis',
+            element: <IndexAnalysisPage />,
+          },
+          {
+            path: 'trend',
+            element: <IndexTrendAnalysisPage />,
           },
         ],
       },

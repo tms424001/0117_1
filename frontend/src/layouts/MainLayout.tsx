@@ -34,6 +34,7 @@ const topModules = [
   { key: 'data-collection', label: '数据采集', icon: <CloudUploadOutlined /> },
   { key: 'data-asset', label: '数据资产', icon: <DatabaseOutlined /> },
   { key: 'standard-library', label: '标准库', icon: <AppstoreOutlined /> },
+  { key: 'index-system', label: '指标体系', icon: <BarChartOutlined /> },
   { key: 'quality-control', label: '质控', icon: <SafetyCertificateOutlined /> },
   { key: 'pricing', label: '计价', icon: <CalculatorOutlined /> },
   { key: 'estimation', label: '估算', icon: <FundOutlined /> },
@@ -100,6 +101,15 @@ const standardLibraryMenuItems: MenuItem[] = [
   ]),
 ];
 
+// 指标体系模块菜单
+const indexSystemMenuItems: MenuItem[] = [
+  getItem('指标统计', 'index-stats', <BarChartOutlined />, [
+    getItem('统计概览', '/index-system/overview', <BarChartOutlined />),
+    getItem('多维分析', '/index-system/analysis', <FundOutlined />),
+    getItem('趋势分析', '/index-system/trend', <FundOutlined />),
+  ]),
+];
+
 // 其他模块菜单（占位）
 const placeholderMenuItems: MenuItem[] = [
   getItem('功能开发中', 'placeholder', <AppstoreOutlined />),
@@ -118,6 +128,7 @@ const MainLayout: React.FC = () => {
       'data-collection': '/data-collection/cost-files',
       'data-asset': '/data-asset/enterprise/cases',
       'standard-library': '/standard-library/tag-system',
+      'index-system': '/index-system/overview',
       'quality-control': '/quality-control',
       'pricing': '/pricing',
       'estimation': '/estimation',
@@ -134,6 +145,8 @@ const MainLayout: React.FC = () => {
         return dataAssetMenuItems;
       case 'standard-library':
         return standardLibraryMenuItems;
+      case 'index-system':
+        return indexSystemMenuItems;
       default:
         return placeholderMenuItems;
     }
