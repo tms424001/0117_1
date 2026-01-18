@@ -48,6 +48,7 @@ import MaterialPriceCheckPage from '../pages/quality-control/MaterialPriceCheckP
 import CompositePriceCheckPage from '../pages/quality-control/CompositePriceCheckPage';
 import BoQDefectCheckPage from '../pages/quality-control/BoQDefectCheckPage';
 import IndexRationalityCheckPage from '../pages/quality-control/IndexRationalityCheckPage';
+import BidClearingPage from '../pages/quality-control/BidClearingPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -313,7 +314,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'bid-clearing',
-            element: <MultiFileComparePage />,
+            element: <BidClearingPage />,
           },
           {
             path: 'settlement',
