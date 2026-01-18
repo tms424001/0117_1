@@ -32,6 +32,8 @@ import PublicCaseDetailPage from '../pages/data-asset/marketplace/PublicCaseDeta
 import CaseContributionPage from '../pages/data-asset/marketplace/CaseContributionPage';
 import InfoPricePage from '../pages/data-asset/marketplace/InfoPricePage';
 import InfoPriceDetailPage from '../pages/data-asset/marketplace/InfoPriceDetailPage';
+import MemberDataPage from '../pages/data-asset/marketplace/MemberDataPage';
+import MemberDataDetailPage from '../pages/data-asset/marketplace/MemberDataDetailPage';
 
 // 标准库管理
 import TagSystemPage from '../pages/standard-library/TagSystemPage';
@@ -184,7 +186,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'marketplace/member-data',
-            element: <PlaceholderPage />,
+            element: <MemberDataPage />,
+          },
+          {
+            path: 'marketplace/member-data/:unitId',
+            element: <MemberDataDetailPage />,
           },
         ],
       },
