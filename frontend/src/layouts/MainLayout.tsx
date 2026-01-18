@@ -129,6 +129,13 @@ const qualityControlMenuItems: MenuItem[] = [
   getItem('规则管理', '/quality-control/rules', <SettingOutlined />),
 ];
 
+// 估算模块菜单
+const estimationMenuItems: MenuItem[] = [
+  getItem('估算项目', '/estimation/projects', <ProjectOutlined />),
+  getItem('快速估算', '/estimation/quick', <CalculatorOutlined />),
+  getItem('估算设置', '/estimation/settings', <SettingOutlined />),
+];
+
 // 其他模块菜单（占位）
 const placeholderMenuItems: MenuItem[] = [
   getItem('功能开发中', 'placeholder', <AppstoreOutlined />),
@@ -148,9 +155,9 @@ const MainLayout: React.FC = () => {
       'data-asset': '/data-asset/enterprise/cases',
       'standard-library': '/standard-library/tag-system',
       'index-system': '/index-system/overview',
-      'quality-control': '/quality-control/single-check',
+      'quality-control': '/quality-control/workbench',
       'pricing': '/pricing',
-      'estimation': '/estimation',
+      'estimation': '/estimation/projects',
     };
     navigate(defaultRoutes[moduleKey] || `/${moduleKey}`);
   };
@@ -168,6 +175,8 @@ const MainLayout: React.FC = () => {
         return indexSystemMenuItems;
       case 'quality-control':
         return qualityControlMenuItems;
+      case 'estimation':
+        return estimationMenuItems;
       default:
         return placeholderMenuItems;
     }

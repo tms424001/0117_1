@@ -67,6 +67,10 @@ import StandardMappingPage from '../pages/standard-library/StandardMappingPage';
 // 占位页面
 import PlaceholderPage from '../pages/PlaceholderPage';
 
+// 估算模块
+import EstimationProjectsPage from '../pages/estimation/ProjectsPage';
+import EstimationWorkbenchPage from '../pages/estimation/EstimationWorkbenchPage';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -342,9 +346,23 @@ const router = createBrowserRouter([
         path: 'pricing',
         element: <PlaceholderPage />,
       },
+      // 估算模块
       {
         path: 'estimation',
-        element: <PlaceholderPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/estimation/projects" replace />,
+          },
+          {
+            path: 'projects',
+            element: <EstimationProjectsPage />,
+          },
+          {
+            path: 'projects/:id',
+            element: <EstimationWorkbenchPage />,
+          },
+        ],
       },
     ],
   },
