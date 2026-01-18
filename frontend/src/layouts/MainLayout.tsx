@@ -112,13 +112,21 @@ const indexSystemMenuItems: MenuItem[] = [
 
 // 质控模块菜单
 const qualityControlMenuItems: MenuItem[] = [
-  getItem('文件检查', 'file-check', <SafetyCertificateOutlined />, [
-    getItem('单文件检查', '/quality-control/single-check', <FileTextOutlined />),
-    getItem('多文件对比', '/quality-control/multi-compare', <FileTextOutlined />),
+  getItem('质控工作台', '/quality-control/workbench', <SafetyCertificateOutlined />),
+  getItem('单文件检查', 'single-check', <FileTextOutlined />, [
+    getItem('合规性检查', '/quality-control/compliance', <FileTextOutlined />),
+    getItem('材料价格检查', '/quality-control/material-price', <DollarOutlined />),
+    getItem('综合单价检查', '/quality-control/composite-price', <DollarOutlined />),
+    getItem('清单缺陷检查', '/quality-control/boq-defect', <FileTextOutlined />),
+    getItem('指标合理性检查', '/quality-control/index-check', <BarChartOutlined />),
   ]),
-  getItem('规则管理', 'rule-manage', <SettingOutlined />, [
-    getItem('检查规则', '/quality-control/rules', <SettingOutlined />),
+  getItem('多文件对比', 'multi-compare', <FileTextOutlined />, [
+    getItem('清标', '/quality-control/bid-clearing', <FileTextOutlined />),
+    getItem('结算复核', '/quality-control/settlement', <FileTextOutlined />),
+    getItem('概算归集', '/quality-control/budget', <FileTextOutlined />),
+    getItem('对标分析', '/quality-control/benchmark', <BarChartOutlined />),
   ]),
+  getItem('规则管理', '/quality-control/rules', <SettingOutlined />),
 ];
 
 // 其他模块菜单（占位）

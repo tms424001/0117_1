@@ -43,6 +43,8 @@ import MemberDataDetailPage from '../pages/data-asset/marketplace/MemberDataDeta
 import SingleFileCheckPage from '../pages/quality-control/SingleFileCheckPage';
 import MultiFileComparePage from '../pages/quality-control/MultiFileComparePage';
 import RuleManagePage from '../pages/quality-control/RuleManagePage';
+import ComplianceCheckPage from '../pages/quality-control/ComplianceCheckPage';
+import MaterialPriceCheckPage from '../pages/quality-control/MaterialPriceCheckPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -276,14 +278,46 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Navigate to="/quality-control/single-check" replace />,
+            element: <Navigate to="/quality-control/workbench" replace />,
           },
           {
-            path: 'single-check',
+            path: 'workbench',
             element: <SingleFileCheckPage />,
           },
           {
-            path: 'multi-compare',
+            path: 'compliance',
+            element: <ComplianceCheckPage />,
+          },
+          {
+            path: 'material-price',
+            element: <MaterialPriceCheckPage />,
+          },
+          {
+            path: 'composite-price',
+            element: <SingleFileCheckPage />,
+          },
+          {
+            path: 'boq-defect',
+            element: <SingleFileCheckPage />,
+          },
+          {
+            path: 'index-check',
+            element: <SingleFileCheckPage />,
+          },
+          {
+            path: 'bid-clearing',
+            element: <MultiFileComparePage />,
+          },
+          {
+            path: 'settlement',
+            element: <MultiFileComparePage />,
+          },
+          {
+            path: 'budget',
+            element: <MultiFileComparePage />,
+          },
+          {
+            path: 'benchmark',
             element: <MultiFileComparePage />,
           },
           {
