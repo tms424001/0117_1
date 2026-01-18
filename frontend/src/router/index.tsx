@@ -285,6 +285,10 @@ const router = createBrowserRouter([
             element: <SingleFileCheckPage />,
           },
           {
+            path: 'single-check',
+            element: <Navigate to="/quality-control/workbench" replace />,
+          },
+          {
             path: 'compliance',
             element: <ComplianceCheckPage />,
           },
