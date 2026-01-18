@@ -26,6 +26,11 @@ import EnterpriseCompositePricesPage from '../pages/data-asset/enterprise/Compos
 import CompositePriceDetailPage from '../pages/data-asset/enterprise/CompositePriceDetailPage';
 import CompositeTemplatesPage from '../pages/data-asset/enterprise/CompositeTemplatesPage';
 
+// 数据资产 - 数据商城
+import PublicCasesPage from '../pages/data-asset/marketplace/PublicCasesPage';
+import PublicCaseDetailPage from '../pages/data-asset/marketplace/PublicCaseDetailPage';
+import CaseContributionPage from '../pages/data-asset/marketplace/CaseContributionPage';
+
 // 标准库管理
 import TagSystemPage from '../pages/standard-library/TagSystemPage';
 import ScaleRangePage from '../pages/standard-library/ScaleRangePage';
@@ -161,7 +166,15 @@ const router = createBrowserRouter([
           },
           {
             path: 'marketplace/public-cases',
-            element: <PlaceholderPage />,
+            element: <PublicCasesPage />,
+          },
+          {
+            path: 'marketplace/public-cases/:caseId',
+            element: <PublicCaseDetailPage />,
+          },
+          {
+            path: 'marketplace/public-cases/contribution',
+            element: <CaseContributionPage />,
           },
           {
             path: 'marketplace/member-data',
