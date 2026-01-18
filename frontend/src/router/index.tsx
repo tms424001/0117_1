@@ -50,6 +50,7 @@ import BoQDefectCheckPage from '../pages/quality-control/BoQDefectCheckPage';
 import IndexRationalityCheckPage from '../pages/quality-control/IndexRationalityCheckPage';
 import BidClearingPage from '../pages/quality-control/BidClearingPage';
 import QCWorkbenchPage from '../pages/quality-control/QCWorkbenchPage';
+import SettlementReviewPage from '../pages/quality-control/SettlementReviewPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -319,7 +320,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'settlement',
-            element: <MultiFileComparePage />,
+            element: <SettlementReviewPage />,
           },
           {
             path: 'budget',
