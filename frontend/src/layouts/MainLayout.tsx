@@ -22,6 +22,9 @@ import {
   TagsOutlined,
   SlidersOutlined,
   ApartmentOutlined,
+  AuditOutlined,
+  SendOutlined,
+  CheckSquareOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import type { MenuProps } from 'antd';
@@ -66,6 +69,10 @@ const dataCollectionMenuItems: MenuItem[] = [
     getItem('我的指标', '/my-data/indexes', <BarChartOutlined />),
     getItem('我的材价', '/my-data/material-prices', <DollarOutlined />),
     getItem('我的综价', '/my-data/composite-prices', <FileTextOutlined />),
+  ]),
+  getItem('PR审核', 'pr-review', <AuditOutlined />, [
+    getItem('我提交的', '/pr-review/my-pr', <SendOutlined />),
+    getItem('待我审核', '/pr-review/pending', <CheckSquareOutlined />),
   ]),
 ];
 

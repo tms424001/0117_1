@@ -8,6 +8,10 @@ import CompositePricesPage from '../pages/data-collection/CompositePricesPage';
 
 // 我的数据页面
 import MyProjectsPage from '../pages/data-collection/my-data/MyProjectsPage';
+
+// PR审核页面
+import MyPRListPage from '../pages/data-collection/pr-review/MyPRListPage';
+import PendingReviewPage from '../pages/data-collection/pr-review/PendingReviewPage';
 import MyIndexesPage from '../pages/data-collection/my-data/MyIndexesPage';
 import MyMaterialPricesPage from '../pages/data-collection/my-data/MyMaterialPricesPage';
 import MyCompositePricesPage from '../pages/data-collection/my-data/MyCompositePricesPage';
@@ -97,6 +101,24 @@ const router = createBrowserRouter([
           {
             path: 'composite-prices',
             element: <MyCompositePricesPage />,
+          },
+        ],
+      },
+      // PR审核
+      {
+        path: 'pr-review',
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/pr-review/my-pr" replace />,
+          },
+          {
+            path: 'my-pr',
+            element: <MyPRListPage />,
+          },
+          {
+            path: 'pending',
+            element: <PendingReviewPage />,
           },
         ],
       },
