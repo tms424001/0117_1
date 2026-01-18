@@ -40,6 +40,147 @@ import {
 import type { ColumnsType } from 'antd/es/table';
 import { useNavigate, useParams } from 'react-router-dom';
 
+// ============================================================
+// 02 标准库 - 功能标签体系 (239标签, 14大类)
+// ============================================================
+const TAG_CATEGORIES = [
+  { code: 'YI', name: '医疗卫生', color: '#f5222d', count: 30 },
+  { code: 'JY', name: '教育', color: '#fa8c16', count: 30 },
+  { code: 'BG', name: '办公', color: '#1890ff', count: 15 },
+  { code: 'SY', name: '商业', color: '#eb2f96', count: 16 },
+  { code: 'JD', name: '酒店', color: '#722ed1', count: 17 },
+  { code: 'WH', name: '文化', color: '#13c2c2', count: 17 },
+  { code: 'TI', name: '体育', color: '#52c41a', count: 16 },
+  { code: 'JZ', name: '居住', color: '#faad14', count: 20 },
+  { code: 'YA', name: '养老', color: '#a0d911', count: 10 },
+  { code: 'SF', name: '司法', color: '#2f54eb', count: 11 },
+  { code: 'JT', name: '交通', color: '#597ef7', count: 11 },
+  { code: 'GY', name: '工业', color: '#8c8c8c', count: 16 },
+  { code: 'TG', name: '通用', color: '#bfbfbf', count: 15 },
+  { code: 'SW', name: '室外/总平', color: '#73d13d', count: 15 },
+];
+
+// 功能标签完整列表（按02_Tag_System_Spec.md）
+const FUNCTION_TAGS = [
+  // 医疗卫生 (YI)
+  { code: 'YI-01', name: '门诊', category: 'YI', keywords: ['门诊', '门急诊', '诊疗'] },
+  { code: 'YI-02', name: '住院', category: 'YI', keywords: ['住院', '病房', '住院部'] },
+  { code: 'YI-03', name: '急诊', category: 'YI', keywords: ['急诊', '急救', '抢救'] },
+  { code: 'YI-04', name: '医技', category: 'YI', keywords: ['医技', '检验', '影像', '放射'] },
+  { code: 'YI-05', name: '手术', category: 'YI', keywords: ['手术', '手术室', '手术中心'] },
+  { code: 'YI-06', name: 'ICU', category: 'YI', keywords: ['ICU', '重症', '监护'] },
+  { code: 'YI-07', name: '感染', category: 'YI', keywords: ['感染', '传染', '发热'] },
+  { code: 'YI-08', name: '行政办公', category: 'YI', keywords: ['行政', '办公', '管理'] },
+  { code: 'YI-09', name: '教学科研', category: 'YI', keywords: ['教学', '科研', '培训'] },
+  { code: 'YI-10', name: '后勤保障', category: 'YI', keywords: ['后勤', '保障', '设备', '锅炉'] },
+  // 教育 (JY)
+  { code: 'JY-01', name: '教学楼', category: 'JY', keywords: ['教学', '教室', '教学楼'] },
+  { code: 'JY-02', name: '实验楼', category: 'JY', keywords: ['实验', '实验室', '实训'] },
+  { code: 'JY-03', name: '图书馆', category: 'JY', keywords: ['图书', '图书馆', '阅览'] },
+  { code: 'JY-04', name: '行政楼', category: 'JY', keywords: ['行政', '办公', '综合楼'] },
+  { code: 'JY-05', name: '学生宿舍', category: 'JY', keywords: ['宿舍', '公寓', '学生'] },
+  { code: 'JY-06', name: '食堂', category: 'JY', keywords: ['食堂', '餐厅', '饭堂'] },
+  { code: 'JY-07', name: '体育馆', category: 'JY', keywords: ['体育馆', '风雨操场', '球馆'] },
+  { code: 'JY-08', name: '礼堂', category: 'JY', keywords: ['礼堂', '报告厅', '会堂'] },
+  // 办公 (BG)
+  { code: 'BG-01', name: '办公楼', category: 'BG', keywords: ['办公', '办公楼', '写字楼'] },
+  { code: 'BG-02', name: '综合楼', category: 'BG', keywords: ['综合', '综合楼'] },
+  { code: 'BG-03', name: '会议中心', category: 'BG', keywords: ['会议', '会议中心', '会展'] },
+  // 商业 (SY)
+  { code: 'SY-01', name: '商场', category: 'SY', keywords: ['商场', '购物', '百货'] },
+  { code: 'SY-02', name: '超市', category: 'SY', keywords: ['超市', '卖场'] },
+  { code: 'SY-03', name: '商业街', category: 'SY', keywords: ['商业街', '步行街', '商铺'] },
+  // 通用 (TG)
+  { code: 'TG-01', name: '地下车库', category: 'TG', keywords: ['车库', '停车', '地下室'] },
+  { code: 'TG-02', name: '配套用房', category: 'TG', keywords: ['配套', '附属', '辅助'] },
+  { code: 'TG-03', name: '人防工程', category: 'TG', keywords: ['人防', '防空'] },
+  { code: 'TG-04', name: '设备用房', category: 'TG', keywords: ['设备', '机房', '配电'] },
+  // 室外 (SW)
+  { code: 'SW-01', name: '室外总平', category: 'SW', keywords: ['室外', '总平', '场地', '道路'] },
+  { code: 'SW-02', name: '景观绿化', category: 'SW', keywords: ['景观', '绿化', '园林'] },
+  { code: 'SW-03', name: '室外管网', category: 'SW', keywords: ['管网', '给排水', '电力'] },
+];
+
+// ============================================================
+// 02 标准库 - 规模分档体系 (7类35档)
+// ============================================================
+const SCALE_TYPES = [
+  { code: 'AREA', name: '建筑面积', unit: 'm²', priority: 1 },
+  { code: 'BED', name: '床位数', unit: '床', priority: 2, applicableCategories: ['YI', 'YA'] },
+  { code: 'CLASS', name: '班级数', unit: '班', priority: 2, applicableCategories: ['JY'] },
+  { code: 'SEAT', name: '座位数', unit: '座', priority: 2, applicableCategories: ['TI', 'WH'] },
+  { code: 'ROOM', name: '客房数', unit: '间', priority: 2, applicableCategories: ['JD'] },
+  { code: 'PARKING', name: '车位数', unit: '个', priority: 2, applicableCategories: ['TG'] },
+  { code: 'HOUSEHOLD', name: '户数', unit: '户', priority: 2, applicableCategories: ['JZ'] },
+];
+
+// 面积分档规则（通用）
+const AREA_SCALE_RANGES = [
+  { code: 'XS', name: '特小型', min: 0, max: 1000 },
+  { code: 'S', name: '小型', min: 1000, max: 5000 },
+  { code: 'M', name: '中型', min: 5000, max: 20000 },
+  { code: 'L', name: '大型', min: 20000, max: 50000 },
+  { code: 'XL', name: '特大型', min: 50000, max: Infinity },
+];
+
+// 04 标签化 - 根据面积自动计算规模档
+const calculateScaleLevel = (area: number): { code: string; name: string } => {
+  for (const range of AREA_SCALE_RANGES) {
+    if (area >= range.min && area < range.max) {
+      return { code: range.code, name: range.name };
+    }
+  }
+  return { code: 'M', name: '中型' };
+};
+
+// 04 标签化 - 智能推荐标签（根据单体名称关键字匹配）
+const recommendTagsByName = (unitName: string): Array<{ tag: typeof FUNCTION_TAGS[0]; confidence: number }> => {
+  const results: Array<{ tag: typeof FUNCTION_TAGS[0]; confidence: number }> = [];
+  const nameLower = unitName.toLowerCase();
+  
+  for (const tag of FUNCTION_TAGS) {
+    let matchScore = 0;
+    for (const keyword of tag.keywords) {
+      if (nameLower.includes(keyword)) {
+        matchScore += keyword.length; // 关键字越长，匹配度越高
+      }
+    }
+    if (matchScore > 0) {
+      results.push({ tag, confidence: Math.min(matchScore / 10, 1) });
+    }
+  }
+  
+  return results.sort((a, b) => b.confidence - a.confidence).slice(0, 5);
+};
+
+// ============================================================
+// 05 指标系统 - 指标匹配逻辑
+// ============================================================
+// 匹配维度：功能标签 × 规模档 × 地区 × 计价阶段
+interface MatchCondition {
+  functionTagCode: string;
+  scaleLevel: string;
+  province: string;
+  pricingStage: string;
+}
+
+// 匹配策略（按优先级降级）
+const MATCH_STRATEGIES = [
+  { level: 1, name: '精确匹配', dimensions: ['functionTagCode', 'scaleLevel', 'province', 'pricingStage'], confidenceAdjust: 0 },
+  { level: 2, name: '降级匹配1', dimensions: ['functionTagCode', 'scaleLevel', 'province'], confidenceAdjust: -1 },
+  { level: 3, name: '降级匹配2', dimensions: ['functionTagCode', 'scaleLevel'], confidenceAdjust: -2 },
+  { level: 4, name: '降级匹配3', dimensions: ['functionTagCode', 'province'], confidenceAdjust: -2 },
+  { level: 5, name: '模糊匹配', dimensions: ['functionTagCode'], confidenceAdjust: -3 },
+];
+
+// 置信度计算（按05_Index_Aggregation_Spec.md）
+const calculateConfidenceLevel = (sampleCount: number, cv: number): string => {
+  if (sampleCount >= 30 && cv <= 0.15) return 'A';
+  if (sampleCount >= 10 && cv <= 0.25) return 'B';
+  if (sampleCount >= 3 && cv <= 0.35) return 'C';
+  return 'D';
+};
+
 // 单体数据类型
 interface EstimationUnit {
   id: string;
@@ -47,12 +188,15 @@ interface EstimationUnit {
   unitCode: string;
   functionTagCode: string;
   functionTagName: string;
+  functionTagCategory: string;
   totalArea: number;
   aboveGroundArea: number;
   undergroundArea: number;
   scaleLevel: string;
   scaleLevelName: string;
   matchStatus: 'matched' | 'partial' | 'none';
+  matchLevel: number; // 匹配层级 1-5
+  matchStrategy: string; // 匹配策略名称
   unitCost: number;
   estimatedCost: number;
 }
@@ -71,39 +215,40 @@ interface MatchedIndex {
   selectedValue: number;
   selectedLevel: 'low' | 'mid' | 'high' | 'custom';
   sampleCount: number;
+  cv: number; // 变异系数
   confidenceLevel: string;
   area: number;
   estimatedCost: number;
+  matchLevel: number;
+  matchStrategy: string;
 }
 
-// 模拟单体数据
+// 模拟单体数据（关联02标准库标签）
 const mockUnits: EstimationUnit[] = [
-  { id: '1', unitName: '门诊医技楼', unitCode: 'U001', functionTagCode: 'YI-01', functionTagName: '门诊', totalArea: 25000, aboveGroundArea: 22000, undergroundArea: 3000, scaleLevel: 'large', scaleLevelName: '大型', matchStatus: 'matched', unitCost: 5200, estimatedCost: 130000000 },
-  { id: '2', unitName: '住院楼', unitCode: 'U002', functionTagCode: 'YI-02', functionTagName: '住院', totalArea: 35000, aboveGroundArea: 32000, undergroundArea: 3000, scaleLevel: 'large', scaleLevelName: '大型', matchStatus: 'matched', unitCost: 4800, estimatedCost: 168000000 },
-  { id: '3', unitName: '后勤综合楼', unitCode: 'U003', functionTagCode: 'YI-10', functionTagName: '后勤保障', totalArea: 8000, aboveGroundArea: 7000, undergroundArea: 1000, scaleLevel: 'medium', scaleLevelName: '中型', matchStatus: 'partial', unitCost: 3500, estimatedCost: 28000000 },
-  { id: '4', unitName: '地下车库', unitCode: 'U004', functionTagCode: 'TG-01', functionTagName: '地下车库', totalArea: 15000, aboveGroundArea: 0, undergroundArea: 15000, scaleLevel: 'large', scaleLevelName: '大型', matchStatus: 'matched', unitCost: 3200, estimatedCost: 48000000 },
-  { id: '5', unitName: '室外工程', unitCode: 'U005', functionTagCode: 'SW-01', functionTagName: '室外总平', totalArea: 2000, aboveGroundArea: 2000, undergroundArea: 0, scaleLevel: 'small', scaleLevelName: '小型', matchStatus: 'none', unitCost: 0, estimatedCost: 0 },
+  { id: '1', unitName: '门诊医技楼', unitCode: 'U001', functionTagCode: 'YI-01', functionTagName: '门诊', functionTagCategory: 'YI', totalArea: 25000, aboveGroundArea: 22000, undergroundArea: 3000, scaleLevel: 'L', scaleLevelName: '大型', matchStatus: 'matched', matchLevel: 1, matchStrategy: '精确匹配', unitCost: 5200, estimatedCost: 130000000 },
+  { id: '2', unitName: '住院楼', unitCode: 'U002', functionTagCode: 'YI-02', functionTagName: '住院', functionTagCategory: 'YI', totalArea: 35000, aboveGroundArea: 32000, undergroundArea: 3000, scaleLevel: 'L', scaleLevelName: '大型', matchStatus: 'matched', matchLevel: 1, matchStrategy: '精确匹配', unitCost: 4800, estimatedCost: 168000000 },
+  { id: '3', unitName: '后勤综合楼', unitCode: 'U003', functionTagCode: 'YI-10', functionTagName: '后勤保障', functionTagCategory: 'YI', totalArea: 8000, aboveGroundArea: 7000, undergroundArea: 1000, scaleLevel: 'M', scaleLevelName: '中型', matchStatus: 'partial', matchLevel: 3, matchStrategy: '降级匹配2', unitCost: 3500, estimatedCost: 28000000 },
+  { id: '4', unitName: '地下车库', unitCode: 'U004', functionTagCode: 'TG-01', functionTagName: '地下车库', functionTagCategory: 'TG', totalArea: 15000, aboveGroundArea: 0, undergroundArea: 15000, scaleLevel: 'M', scaleLevelName: '中型', matchStatus: 'matched', matchLevel: 1, matchStrategy: '精确匹配', unitCost: 3200, estimatedCost: 48000000 },
+  { id: '5', unitName: '室外工程', unitCode: 'U005', functionTagCode: 'SW-01', functionTagName: '室外总平', functionTagCategory: 'SW', totalArea: 2000, aboveGroundArea: 2000, undergroundArea: 0, scaleLevel: 'S', scaleLevelName: '小型', matchStatus: 'none', matchLevel: 0, matchStrategy: '无匹配', unitCost: 0, estimatedCost: 0 },
 ];
 
-// 模拟指标匹配结果
+// 功能标签选项（用于下拉选择，基于FUNCTION_TAGS生成）
+const functionTagOptions = FUNCTION_TAGS.map(tag => {
+  const category = TAG_CATEGORIES.find(c => c.code === tag.category);
+  return {
+    value: tag.code,
+    label: `${tag.name} (${tag.code})`,
+    category: category?.name || tag.category,
+    categoryCode: tag.category,
+  };
+});
+
+// 模拟指标匹配结果（关联05指标聚合规范）
 const mockMatchedIndexes: MatchedIndex[] = [
-  { id: 'm1', unitId: '1', spaceCode: 'DS', spaceName: '地上', professionCode: 'TJ', professionName: '土建', recommendedLow: 2800, recommendedMid: 3200, recommendedHigh: 3600, selectedValue: 3200, selectedLevel: 'mid', sampleCount: 156, confidenceLevel: 'A', area: 22000, estimatedCost: 70400000 },
-  { id: 'm2', unitId: '1', spaceCode: 'DS', spaceName: '地上', professionCode: 'AZ', professionName: '安装', recommendedLow: 1200, recommendedMid: 1500, recommendedHigh: 1800, selectedValue: 1500, selectedLevel: 'mid', sampleCount: 142, confidenceLevel: 'A', area: 22000, estimatedCost: 33000000 },
-  { id: 'm3', unitId: '1', spaceCode: 'DX', spaceName: '地下', professionCode: 'TJ', professionName: '土建', recommendedLow: 2200, recommendedMid: 2500, recommendedHigh: 2800, selectedValue: 2500, selectedLevel: 'mid', sampleCount: 89, confidenceLevel: 'B', area: 3000, estimatedCost: 7500000 },
-  { id: 'm4', unitId: '1', spaceCode: 'DX', spaceName: '地下', professionCode: 'AZ', professionName: '安装', recommendedLow: 800, recommendedMid: 1000, recommendedHigh: 1200, selectedValue: 1000, selectedLevel: 'mid', sampleCount: 76, confidenceLevel: 'B', area: 3000, estimatedCost: 3000000 },
-];
-
-// 功能标签选项
-const functionTagOptions = [
-  { value: 'YI-01', label: '门诊', category: '医疗卫生' },
-  { value: 'YI-02', label: '住院', category: '医疗卫生' },
-  { value: 'YI-03', label: '急诊', category: '医疗卫生' },
-  { value: 'YI-10', label: '后勤保障', category: '医疗卫生' },
-  { value: 'JY-01', label: '教学楼', category: '教育' },
-  { value: 'JY-02', label: '实验楼', category: '教育' },
-  { value: 'BG-01', label: '办公楼', category: '办公' },
-  { value: 'TG-01', label: '地下车库', category: '通用' },
-  { value: 'SW-01', label: '室外总平', category: '室外' },
+  { id: 'm1', unitId: '1', spaceCode: 'DS', spaceName: '地上', professionCode: 'TJ', professionName: '土建', recommendedLow: 2800, recommendedMid: 3200, recommendedHigh: 3600, selectedValue: 3200, selectedLevel: 'mid', sampleCount: 156, cv: 0.12, confidenceLevel: 'A', area: 22000, estimatedCost: 70400000, matchLevel: 1, matchStrategy: '精确匹配' },
+  { id: 'm2', unitId: '1', spaceCode: 'DS', spaceName: '地上', professionCode: 'AZ', professionName: '安装', recommendedLow: 1200, recommendedMid: 1500, recommendedHigh: 1800, selectedValue: 1500, selectedLevel: 'mid', sampleCount: 142, cv: 0.14, confidenceLevel: 'A', area: 22000, estimatedCost: 33000000, matchLevel: 1, matchStrategy: '精确匹配' },
+  { id: 'm3', unitId: '1', spaceCode: 'DX', spaceName: '地下', professionCode: 'TJ', professionName: '土建', recommendedLow: 2200, recommendedMid: 2500, recommendedHigh: 2800, selectedValue: 2500, selectedLevel: 'mid', sampleCount: 89, cv: 0.18, confidenceLevel: 'B', area: 3000, estimatedCost: 7500000, matchLevel: 2, matchStrategy: '降级匹配1' },
+  { id: 'm4', unitId: '1', spaceCode: 'DX', spaceName: '地下', professionCode: 'AZ', professionName: '安装', recommendedLow: 800, recommendedMid: 1000, recommendedHigh: 1200, selectedValue: 1000, selectedLevel: 'mid', sampleCount: 76, cv: 0.20, confidenceLevel: 'B', area: 3000, estimatedCost: 3000000, matchLevel: 2, matchStrategy: '降级匹配1' },
 ];
 
 const EstimationWorkbenchPage: React.FC = () => {
