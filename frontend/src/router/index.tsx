@@ -19,6 +19,9 @@ import CaseComparePage from '../pages/data-asset/enterprise/CaseComparePage';
 import EnterpriseIndexesPage from '../pages/data-asset/enterprise/IndexesPage';
 import IndexTrendPage from '../pages/data-asset/enterprise/IndexTrendPage';
 import IndexPublishPage from '../pages/data-asset/enterprise/IndexPublishPage';
+import EnterpriseMaterialPricesPage from '../pages/data-asset/enterprise/MaterialPricesPage';
+import MaterialPriceDetailPage from '../pages/data-asset/enterprise/MaterialPriceDetailPage';
+import MaterialPriceAnalysisPage from '../pages/data-asset/enterprise/MaterialPriceAnalysisPage';
 
 // 占位页面
 import PlaceholderPage from '../pages/PlaceholderPage';
@@ -102,6 +105,18 @@ const router = createBrowserRouter([
           },
           {
             path: 'enterprise/materials',
+            element: <EnterpriseMaterialPricesPage />,
+          },
+          {
+            path: 'enterprise/materials/:priceId',
+            element: <MaterialPriceDetailPage />,
+          },
+          {
+            path: 'enterprise/materials/analysis',
+            element: <MaterialPriceAnalysisPage />,
+          },
+          {
+            path: 'enterprise/materials/benchmark',
             element: <PlaceholderPage />,
           },
           {
