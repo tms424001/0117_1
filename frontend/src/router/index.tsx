@@ -45,6 +45,7 @@ import MultiFileComparePage from '../pages/quality-control/MultiFileComparePage'
 import RuleManagePage from '../pages/quality-control/RuleManagePage';
 import ComplianceCheckPage from '../pages/quality-control/ComplianceCheckPage';
 import MaterialPriceCheckPage from '../pages/quality-control/MaterialPriceCheckPage';
+import CompositePriceCheckPage from '../pages/quality-control/CompositePriceCheckPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -298,7 +299,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'composite-price',
-            element: <SingleFileCheckPage />,
+            element: <CompositePriceCheckPage />,
           },
           {
             path: 'boq-defect',
