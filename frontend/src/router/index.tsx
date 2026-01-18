@@ -30,6 +30,8 @@ import CompositeTemplatesPage from '../pages/data-asset/enterprise/CompositeTemp
 import PublicCasesPage from '../pages/data-asset/marketplace/PublicCasesPage';
 import PublicCaseDetailPage from '../pages/data-asset/marketplace/PublicCaseDetailPage';
 import CaseContributionPage from '../pages/data-asset/marketplace/CaseContributionPage';
+import InfoPricePage from '../pages/data-asset/marketplace/InfoPricePage';
+import InfoPriceDetailPage from '../pages/data-asset/marketplace/InfoPriceDetailPage';
 
 // 标准库管理
 import TagSystemPage from '../pages/standard-library/TagSystemPage';
@@ -162,7 +164,11 @@ const router = createBrowserRouter([
           },
           {
             path: 'marketplace/info-price',
-            element: <PlaceholderPage />,
+            element: <InfoPricePage />,
+          },
+          {
+            path: 'marketplace/info-price/:priceId',
+            element: <InfoPriceDetailPage />,
           },
           {
             path: 'marketplace/public-cases',
