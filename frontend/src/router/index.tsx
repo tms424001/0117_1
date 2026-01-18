@@ -46,6 +46,7 @@ import RuleManagePage from '../pages/quality-control/RuleManagePage';
 import ComplianceCheckPage from '../pages/quality-control/ComplianceCheckPage';
 import MaterialPriceCheckPage from '../pages/quality-control/MaterialPriceCheckPage';
 import CompositePriceCheckPage from '../pages/quality-control/CompositePriceCheckPage';
+import BoQDefectCheckPage from '../pages/quality-control/BoQDefectCheckPage';
 
 // 指标体系
 import IndexOverviewPage from '../pages/index-system/IndexOverviewPage';
@@ -303,7 +304,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'boq-defect',
-            element: <SingleFileCheckPage />,
+            element: <BoQDefectCheckPage />,
           },
           {
             path: 'index-check',
